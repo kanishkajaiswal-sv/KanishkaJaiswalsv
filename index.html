@@ -4,6 +4,22 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Kanishka Jaiswal | Biotechnology Portfolio</title>
+<meta name="description" content="Kanishka Jaiswal — M.Sc. Biotechnology researcher specializing in genetic engineering, CRISPR-Cas9, and bioinformatics. Open to research collaborations and internship opportunities."/>
+
+<!-- Open Graph / Social Preview -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Kanishka Jaiswal | Biotechnology Portfolio"/>
+<meta property="og:description" content="M.Sc. Biotechnology researcher specializing in genetic engineering, CRISPR-Cas9, and bioinformatics. Open to research collaborations and internship opportunities."/>
+<meta property="og:image" content="og-banner.png"/>
+<meta property="og:url" content="https://kanishkajaiswal.github.io/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Kanishka Jaiswal | Biotechnology Portfolio"/>
+<meta name="twitter:description" content="M.Sc. Biotechnology researcher specializing in genetic engineering, CRISPR-Cas9, and bioinformatics."/>
+<meta name="twitter:image" content="og-banner.png"/>
+
+<!-- Favicon (DNA emoji as inline SVG — no extra file needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AC%3C/text%3E%3C/svg%3E"/>
+
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
@@ -92,6 +108,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;
 }
 @keyframes pulse-dot{0%,100%{box-shadow:0 0 6px var(--teal-mid);}50%{box-shadow:0 0 18px var(--teal-mid);}}
 
+.open-to-work-badge{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:rgba(46,230,166,.08);border:1px solid rgba(46,230,166,.3);
+  border-radius:999px;padding:.4rem 1rem .4rem .7rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;
+  letter-spacing:.04em;color:#7ff5cf;margin-bottom:1.1rem;
+  backdrop-filter:blur(6px);
+  opacity:0;animation:fadeUp .7s .15s forwards;
+}
+.otw-dot{width:7px;height:7px;border-radius:50%;background:var(--neon-green);
+  box-shadow:0 0 8px var(--neon-green);animation:pulse-dot 1.6s infinite;flex-shrink:0;}
+
 .hero-name{
   font-family:'Playfair Display',serif;
   font-size:clamp(2.8rem,5.5vw,5rem);
@@ -110,6 +138,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;
   letter-spacing:.08em;margin-bottom:1.6rem;
   opacity:0;animation:fadeUp .7s .3s forwards;
 }
+.typing-cursor{
+  display:inline-block;color:var(--teal-mid);font-weight:600;
+  animation:typing-blink 1s step-end infinite;
+}
+@keyframes typing-blink{0%,50%{opacity:1;}51%,100%{opacity:0;}}
 
 .hero-desc{
   font-size:1rem;color:rgba(255,255,255,.65);
@@ -289,6 +322,15 @@ section{padding:5rem 2rem;}
 .skills-bg .section-title{color:var(--white);}
 .skills-bg .section-desc{color:#9ca3af;}
 .skills-bg .divider{background:var(--teal-mid);}
+#skills,#experience{position:relative;overflow:hidden;}
+.section-bg-pattern{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  opacity:.16;
+}
+.section-bg-pattern svg{width:100%;height:100%;display:block;}
+.section-bg-pattern-light{opacity:.08;}
+#skills .container,#experience .container{position:relative;z-index:1;}
+.experience-bg{background:var(--paper);}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(278px,1fr));gap:1.5rem;}
 .skill-card{background:#161c24;border:1px solid #2a3240;border-radius:12px;padding:1.6rem;
   transition:border-color .2s,transform .2s;}
@@ -296,26 +338,92 @@ section{padding:5rem 2rem;}
 .skill-card-icon{font-size:1.5rem;margin-bottom:.8rem;}
 .skill-card h3{font-size:.8rem;font-weight:700;color:var(--teal-mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;}
 .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.skill-bar-track{
+  margin-top:1.1rem;height:6px;border-radius:999px;
+  background:rgba(255,255,255,.08);overflow:hidden;
+}
+.skill-bar-fill{
+  height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--teal-mid),var(--neon-green));
+  box-shadow:0 0 10px rgba(46,230,166,.5);
+  transition:width 1.2s cubic-bezier(.22,1,.36,1);
+}
 .skill-tag{background:#1e2a35;color:#94a3b8;font-size:.74rem;padding:.22rem .6rem;
   border-radius:4px;font-family:'JetBrains Mono',monospace;border:1px solid #2a3a48;}
+
+/* ---- skill card scientific visual ---- */
+.skill-card{display:flex;flex-direction:column;}
+.skill-card-media{
+  position:relative;width:calc(100% + 3.2rem);height:140px;
+  margin:-1.6rem -1.6rem 1.1rem -1.6rem;border-radius:12px 12px 0 0;overflow:hidden;
+  background:#0d1117;
+  box-shadow:0 0 0 1px rgba(46,230,166,.06) inset;
+}
+.skill-card-media img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.08) contrast(1.02);
+  transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;
+  will-change:transform;
+}
+.skill-card-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,18,23,0) 35%,#161c24 96%),
+    linear-gradient(120deg,rgba(13,124,110,.18),rgba(46,230,166,.05) 60%);
+  pointer-events:none;
+}
+.skill-card-media::before{
+  content:'';position:absolute;inset:0;z-index:2;
+  box-shadow:inset 0 0 26px rgba(46,230,166,.18);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.skill-card:hover .skill-card-media img{transform:scale(1.1);filter:saturate(1.2) contrast(1.05);}
+.skill-card:hover .skill-card-media::before{opacity:1;}
+.skill-card:hover{box-shadow:0 10px 34px rgba(13,124,110,.18);}
 
 /* ===== EXPERIENCE ===== */
 .exp-cards{display:grid;gap:1.4rem;}
 .exp-card{background:var(--white);border:1px solid var(--border);border-radius:12px;
-  padding:1.6rem 1.8rem;display:flex;gap:1.4rem;align-items:flex-start;transition:box-shadow .2s;}
+  padding:1.6rem 1.8rem;display:flex;gap:1.4rem;align-items:flex-start;transition:box-shadow .2s;
+  flex-wrap:wrap;}
 .exp-card:hover{box-shadow:0 4px 24px rgba(0,0,0,.08);}
 .exp-icon{width:44px;height:44px;border-radius:10px;background:var(--teal-light);
   border:1px solid #b3ddd8;display:flex;align-items:center;justify-content:center;
   font-size:1.2rem;flex-shrink:0;}
+.exp-body{flex:1 1 280px;min-width:0;}
 .exp-body h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;}
 .exp-where{font-size:.85rem;color:var(--teal);font-weight:500;margin-bottom:.5rem;}
 .exp-body p{font-size:.9rem;color:var(--muted);line-height:1.65;}
+
+/* ---- experience contextual image ---- */
+.exp-media{
+  position:relative;flex:0 0 200px;width:200px;height:140px;border-radius:12px;
+  overflow:hidden;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  background:rgba(13,124,110,.06);border:1px solid rgba(13,124,110,.18);
+  box-shadow:0 6px 22px rgba(13,124,110,.14);
+}
+.exp-media img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.22,1,.36,1),filter .4s;
+  filter:saturate(1.05);
+}
+.exp-media::after{
+  content:'';position:absolute;inset:0;border-radius:12px;
+  box-shadow:inset 0 0 0 1px rgba(13,124,110,.12);pointer-events:none;
+}
+.exp-card:hover .exp-media{box-shadow:0 10px 30px rgba(13,124,110,.28);border-color:rgba(13,124,110,.4);}
+.exp-card:hover .exp-media img{transform:scale(1.1);}
+@media (max-width:640px){
+  .exp-media{flex:1 1 100%;width:100%;height:160px;order:-1;}
+}
 
 /* ===== PROJECTS ===== */
 .projects-bg{background:var(--white);}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem;}
 .project-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
 .project-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(13,124,110,.12);}
+.project-image{width:100%;height:170px;overflow:hidden;display:block;}
+.project-image svg{width:100%;height:100%;display:block;transition:transform .5s ease;}
+.project-card:hover .project-image svg{transform:scale(1.05);}
 .project-header{padding:1.8rem;color:white;position:relative;}
 .project-header-teal{background:linear-gradient(135deg,var(--teal) 0%,#0a9e8b 100%);}
 .project-header-green{background:linear-gradient(135deg,#1d7a3e 0%,#2da85e 100%);}
@@ -527,6 +635,85 @@ section{padding:5rem 2rem;}
   .cv2-social-grid{grid-template-columns:repeat(1,1fr);}
 }
 
+/* ===== SECTION PROGRESS DOT NAV ===== */
+.dot-nav{
+  position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);
+  z-index:150;display:flex;flex-direction:column;gap:.85rem;
+}
+.dot-nav-item{
+  display:flex;align-items:center;gap:.6rem;justify-content:flex-end;
+  text-decoration:none;cursor:pointer;
+}
+.dot-nav-dot{
+  width:9px;height:9px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.3);
+  transition:background .3s,box-shadow .3s,transform .3s,border-color .3s;
+}
+.dot-nav-label{
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.06em;
+  color:rgba(255,255,255,.45);text-transform:uppercase;
+  opacity:0;transform:translateX(8px);
+  transition:opacity .25s,transform .25s;white-space:nowrap;
+  background:rgba(5,10,9,.85);padding:.2rem .55rem;border-radius:6px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.dot-nav-item:hover .dot-nav-label{opacity:1;transform:translateX(0);}
+.dot-nav-item:hover .dot-nav-dot{border-color:var(--teal-mid);transform:scale(1.2);}
+.dot-nav-item.active .dot-nav-dot{
+  background:var(--neon-green);border-color:var(--neon-green);
+  box-shadow:0 0 10px var(--neon-green);transform:scale(1.3);
+}
+.dot-nav-item.active .dot-nav-label{color:var(--neon-green);}
+@media(max-width:1100px){
+  .dot-nav{display:none;}
+}
+
+
+/* ===== CURSOR TRAIL ===== */
+.cursor-glow{
+  position:fixed;top:0;left:0;width:18px;height:18px;border-radius:50%;
+  pointer-events:none;z-index:9999;
+  background:radial-gradient(circle,rgba(46,230,166,.9) 0%,rgba(61,184,255,.5) 60%,transparent 100%);
+  box-shadow:0 0 18px 4px rgba(46,230,166,.55);
+  transform:translate(-50%,-50%);
+  transition:transform .12s ease-out,opacity .3s;
+  opacity:0;
+}
+.cursor-glow.active{opacity:1;}
+.cursor-trail-dot{
+  position:fixed;top:0;left:0;width:6px;height:6px;border-radius:50%;
+  pointer-events:none;z-index:9998;background:rgba(46,230,166,.55);
+  transform:translate(-50%,-50%);opacity:0;
+}
+@media(max-width:900px),(hover:none){
+  .cursor-glow,.cursor-trail-dot{display:none;}
+}
+
+/* ===== EDU TIMELINE TOOLTIP ===== */
+.edu-card{position:relative;}
+.edu-tooltip{
+  position:absolute;left:0;bottom:calc(100% + 12px);
+  background:rgba(5,10,9,.95);color:#eef6f5;
+  border:1px solid rgba(26,171,153,.35);border-radius:10px;
+  padding:.7rem .9rem;font-size:.78rem;line-height:1.5;
+  width:min(280px,80vw);box-shadow:0 10px 30px rgba(0,0,0,.4);
+  opacity:0;visibility:hidden;transform:translateY(6px);
+  transition:opacity .25s,transform .25s,visibility .25s;
+  z-index:30;font-family:'Space Grotesk',sans-serif;
+}
+.edu-tooltip::after{
+  content:'';position:absolute;left:20px;top:100%;
+  border:7px solid transparent;border-top-color:rgba(26,171,153,.35);
+}
+.edu-card:hover .edu-tooltip{opacity:1;visibility:visible;transform:translateY(0);}
+@media(max-width:600px){
+  .edu-tooltip{position:static;opacity:1;visibility:visible;transform:none;
+    margin-top:.7rem;width:100%;box-shadow:none;background:rgba(13,124,110,.05);
+    border-color:var(--border);color:var(--ink);}
+  .edu-tooltip::after{display:none;}
+}
+
+
 
 /* ===== FOOTER ===== */
 footer{background:#020c0a;color:#4a6b63;text-align:center;padding:2rem;
@@ -562,6 +749,21 @@ footer strong{color:var(--teal-mid);}
 </style>
 </head>
 <body>
+
+<!-- CURSOR TRAIL ELEMENTS -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- SECTION PROGRESS DOT NAV -->
+<nav class="dot-nav" id="dotNav" aria-label="Section navigation">
+  <a href="#about" class="dot-nav-item" data-section="about"><span class="dot-nav-dot"></span><span class="dot-nav-label">About</span></a>
+  <a href="#education" class="dot-nav-item" data-section="education"><span class="dot-nav-dot"></span><span class="dot-nav-label">Education</span></a>
+  <a href="#skills" class="dot-nav-item" data-section="skills"><span class="dot-nav-dot"></span><span class="dot-nav-label">Skills</span></a>
+  <a href="#experience" class="dot-nav-item" data-section="experience"><span class="dot-nav-dot"></span><span class="dot-nav-label">Experience</span></a>
+  <a href="#projects" class="dot-nav-item" data-section="projects"><span class="dot-nav-dot"></span><span class="dot-nav-label">Projects</span></a>
+  <a href="#certifications" class="dot-nav-item" data-section="certifications"><span class="dot-nav-dot"></span><span class="dot-nav-label">Certifications</span></a>
+  <a href="#goals" class="dot-nav-item" data-section="goals"><span class="dot-nav-dot"></span><span class="dot-nav-label">Goals</span></a>
+  <a href="#contact" class="dot-nav-item" data-section="contact"><span class="dot-nav-dot"></span><span class="dot-nav-label">Contact</span></a>
+</nav>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -601,9 +803,14 @@ footer strong{color:var(--teal-mid);}
         M.Sc. Biotechnology Researcher
       </div>
 
+      <div class="open-to-work-badge">
+        <span class="otw-dot"></span>
+        Open to Internships &amp; Research Collaborations
+      </div>
+
       <h1 class="hero-name">Kanishka<br>Jaiswal</h1>
 
-      <div class="hero-subtitle">M.Sc. Biotechnology &nbsp;·&nbsp; LPU &nbsp;·&nbsp; Phagwara</div>
+      <div class="hero-subtitle"><span id="typing-text"></span><span class="typing-cursor">|</span></div>
 
       <p class="hero-desc">
         Molecular biologist in training with a strong interest in
@@ -668,9 +875,9 @@ footer strong{color:var(--teal-mid);}
       </div>
       <div class="reveal">
         <div class="stat-row">
-          <div class="stat-box"><span class="stat-num">8.15</span><span class="stat-lbl">M.Sc. CGPA</span></div>
-          <div class="stat-box"><span class="stat-num">63%</span><span class="stat-lbl">B.Sc. Score</span></div>
-          <div class="stat-box"><span class="stat-num">5+</span><span class="stat-lbl">Certificates</span></div>
+          <div class="stat-box"><span class="stat-num" data-count="8.15" data-decimals="2">0</span><span class="stat-lbl">M.Sc. CGPA</span></div>
+          <div class="stat-box"><span class="stat-num" data-count="63" data-suffix="%">0</span><span class="stat-lbl">B.Sc. Score</span></div>
+          <div class="stat-box"><span class="stat-num" data-count="5" data-suffix="+">0</span><span class="stat-lbl">Certificates</span></div>
         </div>
         <div class="current-lab">
           <div class="current-lab-title">Current Activities</div>
@@ -695,19 +902,27 @@ footer strong{color:var(--teal-mid);}
     <div class="edu-timeline">
       <div class="edu-item reveal">
         <div class="edu-dot"><div class="edu-dot-inner"></div></div>
-        <div class="edu-card"><h3>M.Sc. (Hons.) Biotechnology</h3><div class="edu-inst">Lovely Professional University, Punjab</div><div class="edu-meta">2025 – 2027 · Present</div><span class="edu-grade">CGPA: 8.15</span></div>
+        <div class="edu-card"><h3>M.Sc. (Hons.) Biotechnology</h3><div class="edu-inst">Lovely Professional University, Punjab</div><div class="edu-meta">2025 – 2027 · Present</div><span class="edu-grade">CGPA: 8.15</span>
+          <div class="edu-tooltip">Currently active in the Genetic Engineering Lab, working on gene cloning, CRISPR-based editing, and molecular biology workflows alongside coursework.</div>
+        </div>
       </div>
       <div class="edu-item reveal">
         <div class="edu-dot"><div class="edu-dot-inner"></div></div>
-        <div class="edu-card"><h3>B.Sc. Life Sciences</h3><div class="edu-inst">Dr. Ram Manohar Lohia Avadh University</div><div class="edu-meta">2019 – 2022</div><span class="edu-grade">63.22%</span></div>
+        <div class="edu-card"><h3>B.Sc. Life Sciences</h3><div class="edu-inst">Dr. Ram Manohar Lohia Avadh University</div><div class="edu-meta">2019 – 2022</div><span class="edu-grade">63.22%</span>
+          <div class="edu-tooltip">Built foundational knowledge in life sciences, setting the stage for specialization in biotechnology and molecular biology at the postgraduate level.</div>
+        </div>
       </div>
       <div class="edu-item reveal">
         <div class="edu-dot"><div class="edu-dot-inner"></div></div>
-        <div class="edu-card"><h3>Class 12 — Science</h3><div class="edu-inst">Kendriya Vidyalaya, ITI Mankapur</div><div class="edu-meta">2019</div><span class="edu-grade">78.8%</span></div>
+        <div class="edu-card"><h3>Class 12 — Science</h3><div class="edu-inst">Kendriya Vidyalaya, ITI Mankapur</div><div class="edu-meta">2019</div><span class="edu-grade">78.8%</span>
+          <div class="edu-tooltip">Completed senior secondary education with a Science stream, sparking early interest in biology and laboratory work.</div>
+        </div>
       </div>
       <div class="edu-item reveal">
         <div class="edu-dot"><div class="edu-dot-inner"></div></div>
-        <div class="edu-card"><h3>Class 10</h3><div class="edu-inst">Kendriya Vidyalaya, ITI Mankapur</div><div class="edu-meta">2017</div><span class="edu-grade">CGPA: 9.0</span></div>
+        <div class="edu-card"><h3>Class 10</h3><div class="edu-inst">Kendriya Vidyalaya, ITI Mankapur</div><div class="edu-meta">2017</div><span class="edu-grade">CGPA: 9.0</span>
+          <div class="edu-tooltip">Strong academic foundation across core subjects, with consistently high performance throughout secondary schooling.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -715,31 +930,80 @@ footer strong{color:var(--teal-mid);}
 
 <!-- SKILLS -->
 <section id="skills" class="skills-bg">
+  <div class="section-bg-pattern" aria-hidden="true">
+    <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g stroke="#2ee6a6" stroke-width="1" fill="none">
+        <line x1="60" y1="60" x2="180" y2="120"/>
+        <line x1="180" y1="120" x2="160" y2="240"/>
+        <line x1="160" y1="240" x2="280" y2="300"/>
+        <line x1="280" y1="300" x2="420" y2="260"/>
+        <line x1="420" y1="260" x2="500" y2="380"/>
+        <line x1="180" y1="120" x2="320" y2="80"/>
+        <line x1="320" y1="80" x2="460" y2="140"/>
+        <line x1="460" y1="140" x2="600" y2="100"/>
+        <line x1="460" y1="140" x2="540" y2="260"/>
+        <line x1="540" y1="260" x2="680" y2="220"/>
+        <line x1="680" y1="220" x2="740" y2="340"/>
+        <line x1="280" y1="300" x2="320" y2="420"/>
+        <line x1="600" y1="100" x2="700" y2="60"/>
+      </g>
+      <g fill="#3db8ff">
+        <circle cx="60" cy="60" r="5"/><circle cx="180" cy="120" r="6"/><circle cx="160" cy="240" r="5"/>
+        <circle cx="280" cy="300" r="6"/><circle cx="420" cy="260" r="5"/><circle cx="500" cy="380" r="5"/>
+        <circle cx="320" cy="80" r="5"/><circle cx="460" cy="140" r="6"/><circle cx="600" cy="100" r="5"/>
+        <circle cx="540" cy="260" r="5"/><circle cx="680" cy="220" r="6"/><circle cx="740" cy="340" r="5"/>
+        <circle cx="320" cy="420" r="5"/><circle cx="700" cy="60" r="4"/>
+      </g>
+    </svg>
+  </div>
   <div class="container">
     <div class="section-label">Technical Expertise</div>
     <h2 class="section-title">Skills</h2>
     <div class="divider"></div>
     <div class="skills-grid">
-      <div class="skill-card reveal"><div class="skill-card-icon">🧬</div><h3>Molecular Biology</h3><div class="skill-tags"><span class="skill-tag">CRISPR-Cas9</span><span class="skill-tag">PCR</span><span class="skill-tag">Gel Electrophoresis</span><span class="skill-tag">DNA/RNA Isolation</span><span class="skill-tag">Gene Cloning</span><span class="skill-tag">Primer Designing</span><span class="skill-tag">Recombinant DNA</span><span class="skill-tag">DNA Ligation</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-icon">⚗️</div><h3>Biochemistry & Analysis</h3><div class="skill-tags"><span class="skill-tag">SDS-PAGE</span><span class="skill-tag">ELISA</span><span class="skill-tag">Western Blotting</span><span class="skill-tag">MTT Assay</span><span class="skill-tag">Electrophoresis</span><span class="skill-tag">Gel Purification</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-icon">🔭</div><h3>Instrumentation</h3><div class="skill-tags"><span class="skill-tag">FE-SEM</span><span class="skill-tag">HPLC</span><span class="skill-tag">GC-MS</span><span class="skill-tag">Autoclave</span><span class="skill-tag">Laminar Air Flow</span><span class="skill-tag">Micropipettes</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-icon">🌱</div><h3>Cell & Microbiology</h3><div class="skill-tags"><span class="skill-tag">Media Preparation</span><span class="skill-tag">Sterilization</span><span class="skill-tag">Staining Protocols</span><span class="skill-tag">Aseptic Techniques</span><span class="skill-tag">Cell Signaling</span><span class="skill-tag">Plant Tissue Culture</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-icon">💻</div><h3>Bioinformatics & Data</h3><div class="skill-tags"><span class="skill-tag">BLAST</span><span class="skill-tag">ClustalW</span><span class="skill-tag">Needleman-Wunsch Algorithm</span><span class="skill-tag">Smith-Waterman Algorithm</span><span class="skill-tag">GenAI Analytics</span><span class="skill-tag">MS Excel</span><span class="skill-tag">MySQL</span><span class="skill-tag">HTML</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-icon">🌟</div><h3>Soft Skills</h3><div class="skill-tags"><span class="skill-tag">Leadership</span><span class="skill-tag">Team Management</span><span class="skill-tag">Technical Writing</span><span class="skill-tag">Presentations</span><span class="skill-tag">Critical Thinking</span><span class="skill-tag">Adaptability</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=70" alt="Scientist examining DNA sample in a molecular biology laboratory representing CRISPR-Cas9 and gene cloning work" loading="lazy"/></div><div class="skill-card-icon">🧬</div><h3>Molecular Biology</h3><div class="skill-tags"><span class="skill-tag">CRISPR-Cas9</span><span class="skill-tag">PCR</span><span class="skill-tag">Gel Electrophoresis</span><span class="skill-tag">DNA/RNA Isolation</span><span class="skill-tag">Gene Cloning</span><span class="skill-tag">Primer Designing</span><span class="skill-tag">Recombinant DNA</span><span class="skill-tag">DNA Ligation</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="90"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&w=800&q=70" alt="ELISA and Western blotting immunoassay laboratory setup for biochemistry analysis" loading="lazy"/></div><div class="skill-card-icon">⚗️</div><h3>Biochemistry &amp; Analysis</h3><div class="skill-tags"><span class="skill-tag">SDS-PAGE</span><span class="skill-tag">ELISA</span><span class="skill-tag">Western Blotting</span><span class="skill-tag">MTT Assay</span><span class="skill-tag">Electrophoresis</span><span class="skill-tag">Gel Purification</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="80"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=800&q=70" alt="Laboratory instrumentation including HPLC, GC-MS and analytical equipment" loading="lazy"/></div><div class="skill-card-icon">🔭</div><h3>Instrumentation</h3><div class="skill-tags"><span class="skill-tag">FE-SEM</span><span class="skill-tag">HPLC</span><span class="skill-tag">GC-MS</span><span class="skill-tag">Autoclave</span><span class="skill-tag">Laminar Air Flow</span><span class="skill-tag">Micropipettes</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="75"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=70" alt="Cell culture under microscope representing microbiology and aseptic laboratory techniques" loading="lazy"/></div><div class="skill-card-icon">🌱</div><h3>Cell &amp; Microbiology</h3><div class="skill-tags"><span class="skill-tag">Media Preparation</span><span class="skill-tag">Sterilization</span><span class="skill-tag">Staining Protocols</span><span class="skill-tag">Aseptic Techniques</span><span class="skill-tag">Cell Signaling</span><span class="skill-tag">Plant Tissue Culture</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="85"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=70" alt="Genomic data visualization and bioinformatics sequence analysis on screen" loading="lazy"/></div><div class="skill-card-icon">💻</div><h3>Bioinformatics &amp; Data</h3><div class="skill-tags"><span class="skill-tag">BLAST</span><span class="skill-tag">ClustalW</span><span class="skill-tag">Needleman-Wunsch Algorithm</span><span class="skill-tag">Smith-Waterman Algorithm</span><span class="skill-tag">GenAI Analytics</span><span class="skill-tag">MS Excel</span><span class="skill-tag">MySQL</span><span class="skill-tag">HTML</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="65"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-card-media"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=70" alt="Research team collaborating and presenting scientific findings" loading="lazy"/></div><div class="skill-card-icon">🌟</div><h3>Soft Skills</h3><div class="skill-tags"><span class="skill-tag">Leadership</span><span class="skill-tag">Team Management</span><span class="skill-tag">Technical Writing</span><span class="skill-tag">Presentations</span><span class="skill-tag">Critical Thinking</span><span class="skill-tag">Adaptability</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-level="88"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
+<section id="experience" class="experience-bg">
+  <div class="section-bg-pattern section-bg-pattern-light" aria-hidden="true">
+    <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g stroke="#0d7c6e" stroke-width="1.2" fill="none">
+        <circle cx="120" cy="100" r="70"/>
+        <circle cx="120" cy="100" r="50"/>
+        <circle cx="680" cy="380" r="90"/>
+        <circle cx="680" cy="380" r="65"/>
+        <circle cx="650" cy="90" r="40"/>
+      </g>
+      <g fill="#0d7c6e" opacity="0.5">
+        <circle cx="100" cy="80" r="3"/><circle cx="140" cy="110" r="4"/><circle cx="110" cy="125" r="2.5"/>
+        <circle cx="660" cy="360" r="4"/><circle cx="700" cy="395" r="3"/><circle cx="670" cy="410" r="3.5"/>
+        <circle cx="640" cy="80" r="2.5"/><circle cx="660" cy="100" r="2"/>
+      </g>
+      <g stroke="#1aab99" stroke-width="1" fill="none" opacity="0.6">
+        <path d="M380,40 Q420,70 380,100 Q340,130 380,160 Q420,190 380,220"/>
+        <path d="M410,40 Q370,70 410,100 Q450,130 410,160 Q370,190 410,220"/>
+        <line x1="380" y1="45" x2="410" y2="45"/>
+        <line x1="380" y1="100" x2="410" y2="100"/>
+        <line x1="380" y1="160" x2="410" y2="160"/>
+      </g>
+    </svg>
+  </div>
   <div class="container">
     <div class="section-label">Lab Experience</div>
     <h2 class="section-title">Research Experience</h2>
     <div class="divider"></div>
     <div class="exp-cards">
-      <div class="exp-card reveal"><div class="exp-icon">🧬</div><div class="exp-body"><h3>Genetic Engineering Laboratory</h3><div class="exp-where">Lovely Professional University · Present</div><p>Currently involved in gene cloning, gene editing, and related molecular biology workflows. Gaining exposure to modern research methodologies including CRISPR-based genome editing and recombinant DNA techniques.</p></div></div>
-      <div class="exp-card reveal"><div class="exp-icon">🌿</div><div class="exp-body"><h3>Plant Biotechnology Laboratory</h3><div class="exp-where">Lovely Professional University</div><p>Acquired hands-on experience in plant-based molecular experiments and plant tissue culture. Developed understanding of applied plant biotechnology, strengthening analytical thinking and interpretation of experimental data.</p></div></div>
-      <div class="exp-card reveal"><div class="exp-icon">🔬</div><div class="exp-body"><h3>CRISPR-Cas9 Training & Internship</h3><div class="exp-where">Maulana Azad Medical College (MAMC), New Delhi · 2026</div><p>Gained direct exposure to genome editing workflows and CRISPR-Cas mechanisms. Learned gRNA design, gene targeting strategies, and molecular cloning basics through formal training by Edutech Life in association with MAMC.</p></div></div>
+      <div class="exp-card reveal"><div class="exp-icon">🧬</div><div class="exp-body"><h3>Genetic Engineering Laboratory</h3><div class="exp-where">Lovely Professional University · Present</div><p>Currently involved in gene cloning, gene editing, and related molecular biology workflows. Gaining exposure to modern research methodologies including CRISPR-based genome editing and recombinant DNA techniques.</p></div><div class="exp-media"><img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=70" alt="Genetic engineering and CRISPR gene editing concept in a molecular biology laboratory" loading="lazy"/></div></div>
+      <div class="exp-card reveal"><div class="exp-icon">🌿</div><div class="exp-body"><h3>Plant Biotechnology Laboratory</h3><div class="exp-where">Lovely Professional University</div><p>Acquired hands-on experience in plant-based molecular experiments and plant tissue culture. Developed understanding of applied plant biotechnology, strengthening analytical thinking and interpretation of experimental data.</p></div><div class="exp-media"><img src="https://images.unsplash.com/photo-1599598177991-ec67b5c37318?auto=format&fit=crop&w=600&q=70" alt="Researcher examining plant seedlings in a plant biotechnology and tissue culture laboratory" loading="lazy"/></div></div>
+      <div class="exp-card reveal"><div class="exp-icon">🔬</div><div class="exp-body"><h3>CRISPR-Cas9 Training &amp; Internship</h3><div class="exp-where">Maulana Azad Medical College (MAMC), New Delhi · 2026</div><p>Gained direct exposure to genome editing workflows and CRISPR-Cas mechanisms. Learned gRNA design, gene targeting strategies, and molecular cloning basics through formal training by Edutech Life in association with MAMC.</p></div><div class="exp-media"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=70" alt="Genome sequencing and CRISPR-Cas9 training laboratory setup" loading="lazy"/></div></div>
     </div>
   </div>
 </section>
@@ -754,6 +1018,57 @@ footer strong{color:var(--teal-mid);}
 
       <!-- PROJECT 1 — Updated -->
       <div class="project-card reveal">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="pg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0d7c6e"/>
+                <stop offset="100%" stop-color="#020e0c"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#pg1)"/>
+            <g stroke="#2ee6a6" stroke-width="1.5" fill="none" opacity="0.85">
+              <path d="M40,30 Q90,60 40,90 Q-10,120 40,150 Q90,180 40,210" stroke-opacity="0.6"/>
+              <path d="M70,30 Q20,60 70,90 Q120,120 70,150 Q20,180 70,210" stroke-opacity="0.6"/>
+              <line x1="40" y1="35" x2="70" y2="35"/>
+              <line x1="44" y1="55" x2="66" y2="55"/>
+              <line x1="40" y1="90" x2="70" y2="90"/>
+              <line x1="44" y1="120" x2="66" y2="120"/>
+              <line x1="40" y1="150" x2="70" y2="150"/>
+              <line x1="44" y1="180" x2="66" y2="180"/>
+            </g>
+            <g fill="#3db8ff">
+              <circle cx="40" cy="35" r="3"/><circle cx="70" cy="35" r="3"/>
+              <circle cx="44" cy="55" r="2.5"/><circle cx="66" cy="55" r="2.5"/>
+              <circle cx="40" cy="90" r="3"/><circle cx="70" cy="90" r="3"/>
+              <circle cx="44" cy="120" r="2.5"/><circle cx="66" cy="120" r="2.5"/>
+              <circle cx="40" cy="150" r="3"/><circle cx="70" cy="150" r="3"/>
+            </g>
+            <g stroke="#2ee6a6" stroke-width="1" opacity="0.45">
+              <line x1="160" y1="40" x2="220" y2="40"/>
+              <line x1="160" y1="70" x2="260" y2="70"/>
+              <line x1="160" y1="100" x2="200" y2="100"/>
+              <line x1="160" y1="130" x2="240" y2="130"/>
+              <line x1="160" y1="160" x2="210" y2="160"/>
+            </g>
+            <g fill="#2ee6a6">
+              <circle cx="220" cy="40" r="4"/>
+              <circle cx="260" cy="70" r="4"/>
+              <circle cx="200" cy="100" r="4"/>
+              <circle cx="240" cy="130" r="4"/>
+              <circle cx="210" cy="160" r="4"/>
+            </g>
+            <g fill="#ffffff" opacity="0.85" font-family="JetBrains Mono, monospace" font-size="9">
+              <text x="160" y="36">ATCG</text>
+              <text x="160" y="66">GCTA</text>
+              <text x="160" y="96">TTAG</text>
+              <text x="160" y="126">CGAT</text>
+              <text x="160" y="156">AGCT</text>
+            </g>
+            <circle cx="330" cy="100" r="55" fill="none" stroke="#4D7CFF" stroke-width="1" opacity="0.3"/>
+            <circle cx="330" cy="100" r="35" fill="none" stroke="#2ee6a6" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
         <div class="project-header project-header-teal">
           <div class="project-icon">🧬</div>
           <h3>Molecular Biomarkers and Genomic Signatures for Early Detection of Diseases</h3>
@@ -774,6 +1089,52 @@ footer strong{color:var(--teal-mid);}
 
       <!-- PROJECT 2 -->
       <div class="project-card reveal">
+        <div class="project-image">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="pg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1d7a3e"/>
+                <stop offset="100%" stop-color="#031a0e"/>
+              </linearGradient>
+              <linearGradient id="algaeGlow" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#2ee6a6" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#2ee6a6" stop-opacity="0.15"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#pg2)"/>
+            <!-- bioreactor tank -->
+            <rect x="55" y="40" width="80" height="130" rx="10" fill="rgba(255,255,255,.04)" stroke="#3db8ff" stroke-width="1.5"/>
+            <rect x="60" y="60" width="70" height="105" rx="6" fill="url(#algaeGlow)"/>
+            <g stroke="#0b3d24" stroke-width="0.8" opacity="0.5">
+              <circle cx="75" cy="150" r="3"/><circle cx="95" cy="140" r="4"/><circle cx="115" cy="155" r="3"/>
+              <circle cx="85" cy="120" r="3.5"/><circle cx="105" cy="110" r="3"/><circle cx="70" cy="100" r="2.5"/>
+              <circle cx="110" cy="90" r="3"/><circle cx="90" cy="75" r="2.5"/>
+            </g>
+            <line x1="95" y1="40" x2="95" y2="20" stroke="#3db8ff" stroke-width="2"/>
+            <circle cx="95" cy="16" r="4" fill="#3db8ff"/>
+            <!-- airflow arrows -->
+            <g stroke="#eef6f5" stroke-width="1.5" fill="none" opacity="0.55" stroke-linecap="round">
+              <path d="M160,70 Q190,70 190,90 Q190,110 220,110"/>
+              <path d="M160,110 Q195,110 195,130 Q195,150 230,150"/>
+              <path d="M160,150 Q200,150 200,165"/>
+            </g>
+            <g fill="#eef6f5" opacity="0.55">
+              <circle cx="220" cy="110" r="2"/><circle cx="230" cy="150" r="2"/><circle cx="200" cy="165" r="2"/>
+            </g>
+            <!-- HEPA filter grid -->
+            <rect x="255" y="55" width="100" height="110" rx="8" fill="rgba(255,255,255,.03)" stroke="#2ee6a6" stroke-width="1.2"/>
+            <g stroke="#2ee6a6" stroke-width="0.7" opacity="0.5">
+              <line x1="265" y1="65" x2="265" y2="155"/>
+              <line x1="280" y1="65" x2="280" y2="155"/>
+              <line x1="295" y1="65" x2="295" y2="155"/>
+              <line x1="310" y1="65" x2="310" y2="155"/>
+              <line x1="325" y1="65" x2="325" y2="155"/>
+              <line x1="340" y1="65" x2="340" y2="155"/>
+            </g>
+            <text x="270" y="180" fill="#eef6f5" opacity="0.6" font-family="JetBrains Mono, monospace" font-size="9">HEPA</text>
+            <text x="65" y="185" fill="#eef6f5" opacity="0.6" font-family="JetBrains Mono, monospace" font-size="9">SPIRULINA</text>
+          </svg>
+        </div>
         <div class="project-header project-header-green">
           <div class="project-icon">🌊</div>
           <h3>Mobile Algal Air Purification using Spirulina platensis</h3>
@@ -1023,6 +1384,140 @@ footer strong{color:var(--teal-mid);}
     requestAnimationFrame(animate);
   }
   animate();
+})();
+
+/* ===== TYPING ANIMATION (hero subtitle) ===== */
+(function(){
+  const el = document.getElementById('typing-text');
+  if(!el) return;
+  const phrases = ['M.Sc. Biotechnology', 'Genetic Engineering Researcher', 'CRISPR-Cas9 Enthusiast', 'Bioinformatics Learner'];
+  let pIdx = 0, cIdx = 0, deleting = false;
+
+  function tick(){
+    const phrase = phrases[pIdx];
+    if(!deleting){
+      cIdx++;
+      el.textContent = phrase.slice(0, cIdx);
+      if(cIdx === phrase.length){
+        deleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+      setTimeout(tick, 65);
+    } else {
+      cIdx--;
+      el.textContent = phrase.slice(0, cIdx);
+      if(cIdx === 0){
+        deleting = false;
+        pIdx = (pIdx + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 35);
+    }
+  }
+  setTimeout(tick, 900);
+})();
+
+/* ===== SCROLL-TRIGGERED COUNTERS ===== */
+(function(){
+  const counters = document.querySelectorAll('.stat-num[data-count]');
+  if(!counters.length) return;
+
+  function animateCounter(el){
+    const target = parseFloat(el.getAttribute('data-count'));
+    const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1400;
+    const start = performance.now();
+
+    function step(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      el.textContent = (decimals > 0 ? current.toFixed(decimals) : Math.round(current)) + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  counters.forEach(c=>counterObserver.observe(c));
+})();
+
+/* ===== CURSOR GLOW TRAIL ===== */
+(function(){
+  const glow = document.getElementById('cursorGlow');
+  if(!glow || window.matchMedia('(hover: none)').matches) return;
+  let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+  let active = false;
+
+  window.addEventListener('mousemove', e=>{
+    mouseX = e.clientX; mouseY = e.clientY;
+    if(!active){ active = true; glow.classList.add('active'); }
+  });
+  window.addEventListener('mouseleave', ()=>{ active=false; glow.classList.remove('active'); });
+
+  function render(){
+    curX += (mouseX - curX) * 0.18;
+    curY += (mouseY - curY) * 0.18;
+    glow.style.left = curX + 'px';
+    glow.style.top = curY + 'px';
+    requestAnimationFrame(render);
+  }
+  render();
+
+  document.querySelectorAll('a, button, .skill-card, .project-card, .cv2-social-btn, .edu-card').forEach(elm=>{
+    elm.addEventListener('mouseenter', ()=>{ glow.style.transform='translate(-50%,-50%) scale(1.8)'; });
+    elm.addEventListener('mouseleave', ()=>{ glow.style.transform='translate(-50%,-50%) scale(1)'; });
+  });
+})();
+
+/* ===== SKILL BAR FILL ANIMATION ===== */
+(function(){
+  const bars = document.querySelectorAll('.skill-bar-fill[data-level]');
+  if(!bars.length) return;
+  const barObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const lvl = entry.target.getAttribute('data-level');
+        entry.target.style.width = lvl + '%';
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  bars.forEach(b=>barObserver.observe(b));
+})();
+
+/* ===== SECTION PROGRESS DOT NAV ===== */
+(function(){
+  const dotItems = document.querySelectorAll('.dot-nav-item');
+  if(!dotItems.length) return;
+  const sections = Array.from(dotItems).map(item=>{
+    const id = item.getAttribute('data-section');
+    return document.getElementById(id);
+  });
+
+  const navObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      const id = entry.target.id;
+      const dotItem = document.querySelector(`.dot-nav-item[data-section="${id}"]`);
+      if(!dotItem) return;
+      if(entry.isIntersecting){
+        dotItems.forEach(d=>d.classList.remove('active'));
+        dotItem.classList.add('active');
+      }
+    });
+  }, {threshold:0.4, rootMargin:'-10% 0px -40% 0px'});
+
+  sections.forEach(sec=>{ if(sec) navObserver.observe(sec); });
 })();
 
 /* ===== SCROLL REVEAL ===== */
